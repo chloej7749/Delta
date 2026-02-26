@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Boarding Pass Generator</title>
+
+<style>
+    body {
+    font-family: 'Montserrat', 'Open Sans', Arial, sans-serif;
+    text-align: center;
+    background: #f4f6fa;
+    }
+
+    .controls {
+    margin-bottom: 20px;
+    }
+
+    input {
+    padding: 8px;
+    margin: 5px;
+    font-size: 14px;
+    }
+
+    button {
+    padding: 8px 15px;
+    margin: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    }
+
+    .ticket-container {
+    position: relative;
+    display: inline-block;
+    }
+
+    .ticket-container img {
+    width: 900px;
+    }
+
+    .overlay-text {
+    position: absolute;
+    font-weight: bold;
+    color: #134280;
+    font-size: 18px;
+    }
+    #nameText {
+        top: 86px;
+        left: 220px;
+    }
+
+    #fromText {
+        top: 225px;
+        left: 142px;
+    }
+
+    #toText {
+        top: 225px;
+        left: 338px;
+    }
+    .side-text {
+        font-size: 14px;
+        }
+
+    #sideFromText {
+        top: 170px;
+        right: 135px;
+    }
+
+    #sideToText {
+        top: 170px;
+        right: 20px;
+    }
+
+</style>
+</head>
+<body>
+
+<h2>Buy a Ticket from Delta Airlines!</h2>
+
+<div class="controls">
+<input type="text" id="nameInput" placeholder = "Enter Name">
+<input type="text" id="fromInput" placeholder="From">
+<input type="text" id="toInput" placeholder="To">
+<br>
+<button onclick="finalizeTicket()">Done!</button>
+<button onclick="restartTicket()">Restart!</button>
+</div>
+
+<div class="ticket-container">
+<img src="boardingpass.png" alt="Boarding Pass">
+<div id="nameText" class="overlay-text"></div>
+<div id="fromText" class="overlay-text"></div>
+<div id="toText" class="overlay-text"></div>
+<div id="sideFromText" class="overlay-text side-text"></div>
+<div id="sideToText" class="overlay-text side-text"></div>
+</div>
+
+<script>
+    const nameInput = document.getElementById("nameInput");
+    const nameText = document.getElementById("nameText");
+    const fromInput = document.getElementById("fromInput");
+    const toInput = document.getElementById("toInput");
+    const fromText = document.getElementById("fromText");
+    const toText = document.getElementById("toText");
+nameInput.addEventListener("input", () => {
+    nameText.innerText = nameInput.value.toUpperCase();
+});
+
+fromInput.addEventListener("input", () => {
+    fromText.innerText = fromInput.value.toUpperCase();
+});
+
+toInput.addEventListener("input", () => {
+    toText.innerText = toInput.value.toUpperCase();
+});
+
+function finalizeTicket() {
+    if (fromInput.value.trim() === "" || toInput.value.trim() === "") {
+        alert("Fill in both destinations, bum");
+        return;
+    }
+    nameInput.disabled = true;
+    fromInput.disabled = true;
+    toInput.disabled = true;
+
+    document.getElementById("sideFromText").innerText = fromInput.value.toUpperCase();
+    document.getElementById("sideToText").innerText = toInput.value.toUpperCase();
+    
+}
+
+function restartTicket() {
+    nameInput.disabled = false;
+    fromInput.disabled = false;
+    toInput.disabled = false;
+
+    nameInput.value = "";
+    fromInput.value = "";
+    toInput.value = "";
+
+    nameText.innerText ="";
+    fromText.innerText = "";
+    toText.innerText = "";
+    document.getElementById("sideFromText").innerText = "";
+    document.getElementById("sideToText").innerText = "";
+}
+</script>
+
+</body>
+</html>
